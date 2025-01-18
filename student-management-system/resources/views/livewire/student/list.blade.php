@@ -13,8 +13,8 @@ new class extends Component {
     }
 }; ?>
 
-<div class="mt-9 bg-blue shadow-sm rounded-ld divide-y">
-    <table class="min-w-full divide-y divide-dray-200 overflow-x-auto">
+<div class="mt-9 bg-white shadow-xl divide-y border rounded">
+    <table class="min-w-full divide-y divide-gray-200 overflow-x-auto">
         <thead class="bg-gray-50">
             <tr>
                 <th scope="col"
@@ -31,18 +31,38 @@ new class extends Component {
                 </th>
             </tr>
         </thead>
+        <tbody class="bg-white divide-y divide-gray-200">
+            @foreach ($students as $student)
+                <tr wire:key="{{ $student->id }}">
+                    <td class="ph-6 py-4">
+                        <div class="flex items-center">
+                            <div class="ml-4">
+                                <div class="text-sm font-medium text-gray-900">
+                                    {{ $student->name }}
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="ph-6 py-4">
+                        <div class="flex items-center">
+                            <div class="ml-4">
+                                <div class="text-sm font-medium text-gray-900">
+                                    {{ $student->email }}
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="ph-6 py-4">
+                        <div class="flex items-center">
+                            <div class="ml-4">
+                                <div class="text-sm font-medium text-gray-900">
+                                    {{ $student->bio }}
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            @endforeach
+        </tbody>
     </table>
-    <!--@foreach ($students as $student)
-        <div class="p-6 flex space-x-2" wire:key="{{ $student->id }}">
-            <div class="flex-1">
-                <div class="flex justify-between items-center">
-                    <div>
-                        <span class="text-gray-800">{{ $student->name }}</span>
-                        <span class="text-gray-800">{{ $student->email }}</span>
-                        <span class="text-gray-800">{{ $student->bio }}</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    @endforeach-->
 </div>
