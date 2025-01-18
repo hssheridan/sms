@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Advisor;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -18,6 +19,7 @@ class CourseFactory extends Factory
     {
         return [
             'name' => fake()->word(),
+            'advisor_id' => fake()->randomElement(Advisor::pluck('id')),
         ];
     }
 }

@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Advisor;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -21,6 +22,7 @@ class StudentFactory extends Factory
             'email' => fake()->unique()->safeEmail(),
             'bio' => fake()->paragraph(),
             'date_of_birth' => fake()->date(),
+            'advisor_id' => fake()->randomElement(Advisor::pluck('id')),
         ];
     }
 }

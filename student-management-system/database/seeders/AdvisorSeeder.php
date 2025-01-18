@@ -16,8 +16,6 @@ class AdvisorSeeder extends Seeder
     public function run(): void
     {
         Advisor::factory()
-            ->hasAttached(Student::inRandomOrder()->take(random_int(0,20))->get('id'))
-            ->hasAttached(Course::inRandomOrder()->take(random_int(0,10))->get('id'))
             ->count(7)
             ->create();
     }
