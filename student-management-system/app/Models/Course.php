@@ -12,6 +12,8 @@ class Course extends Model
     /** @use HasFactory<\Database\Factories\CourseFactory> */
     use HasFactory;
 
+    protected $fillable = ['name', 'advisor_id'];
+
     public function advisor(): BelongsTo
     {
         return $this->belongsTo(Advisor::class);

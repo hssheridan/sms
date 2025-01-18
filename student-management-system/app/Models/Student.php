@@ -12,6 +12,8 @@ class Student extends Model
     /** @use HasFactory<\Database\Factories\StudentFactory> */
     use HasFactory;
 
+    protected $fillable = ['name', 'email', 'bio', 'date_of_birth', 'advisor_id'];
+
     public function advisor(): BelongsTo
     {
         return $this->belongsTo(Advisor::class);

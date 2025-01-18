@@ -11,6 +11,8 @@ class Advisor extends Model
     /** @use HasFactory<\Database\Factories\AdvisorFactory> */
     use HasFactory;
 
+    protected $fillable = ['name', 'email'];
+
     public function courses(): HasMany
     {
         return $this->hasMany(Course::class);

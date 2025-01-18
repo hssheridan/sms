@@ -2,10 +2,9 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources;
-use App\Filament\Resources\StudentResource\Pages;
-use App\Filament\Resources\StudentResource\RelationManagers;
-use App\Models\Student;
+use App\Filament\Resources\AdvisorResource\Pages;
+use App\Filament\Resources\AdvisorResource\RelationManagers;
+use App\Models\Advisor;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -14,9 +13,9 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class StudentResource extends Resource
+class AdvisorResource extends Resource
 {
-    protected static ?string $model = Student::class;
+    protected static ?string $model = Advisor::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
@@ -31,16 +30,6 @@ class StudentResource extends Resource
                     ->required()
                     ->unique()
                     ->maxLength(255),
-                Forms\Components\TextArea::make('bio')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\DatePicker::make('date_of_birth')
-                    ->required()
-                    ->maxDate(now()),
-                Forms\Components\Select::make('advisor_id')
-                    ->relationship('advisor', 'name')
-                    ->searchable()
-                    ->preload(),
             ]);
     }
 
@@ -51,10 +40,6 @@ class StudentResource extends Resource
                 Tables\Columns\TextColumn::make('name')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('email')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('bio'),
-                Tables\Columns\TextColumn::make('date_of_birth'),
-                Tables\Columns\TextColumn::make('advisor.name')
                     ->searchable(),
             ])
             ->filters([
@@ -80,9 +65,9 @@ class StudentResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListStudents::route('/'),
-            'create' => Pages\CreateStudent::route('/create'),
-            'edit' => Pages\EditStudent::route('/{record}/edit'),
+            'index' => Pages\ListAdvisors::route('/'),
+            'create' => Pages\CreateAdvisor::route('/create'),
+            'edit' => Pages\EditAdvisor::route('/{record}/edit'),
         ];
     }
 }
