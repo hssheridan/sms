@@ -28,7 +28,7 @@ class AdvisorResource extends Resource
                     ->maxLength(255),
                 Forms\Components\TextInput::make('email')
                     ->required()
-                    ->unique()
+                    ->unique(ignorable: fn ($record) => $record)
                     ->maxLength(255),
             ]);
     }
@@ -47,6 +47,7 @@ class AdvisorResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\ViewAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -67,6 +68,7 @@ class AdvisorResource extends Resource
         return [
             'index' => Pages\ListAdvisors::route('/'),
             'create' => Pages\CreateAdvisor::route('/create'),
+            'view' => Pages\ViewAdvisor::route('/{record}'),
             'edit' => Pages\EditAdvisor::route('/{record}/edit'),
         ];
     }
