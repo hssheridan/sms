@@ -5,6 +5,7 @@ namespace App\Filament\Resources\AdvisorResource\RelationManagers;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Components\TextArea;
 use Filament\Forms\Components\TextInput;
 use Filament\Resources\RelationManagers\RelationManager;
@@ -32,6 +33,9 @@ class StudentsRelationManager extends RelationManager
                 TextArea::make('bio')
                     ->required()
                     ->maxLength(255),
+                SpatieMediaLibraryFileUpload::make('image')
+                    ->responsiveImages()
+                    ->image(),
                 DatePicker::make('date_of_birth')
                     ->required()
                     ->maxDate(now()),

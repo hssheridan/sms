@@ -10,6 +10,7 @@ use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Components\TextArea;
 use Filament\Forms\Components\TextInput;
 use Filament\Resources\Resource;
@@ -39,6 +40,9 @@ class StudentResource extends Resource
                 TextArea::make('bio')
                     ->required()
                     ->maxLength(255),
+                SpatieMediaLibraryFileUpload::make('image')
+                    ->responsiveImages()
+                    ->image(),
                 DatePicker::make('date_of_birth')
                     ->required()
                     ->maxDate(now()),
@@ -64,6 +68,7 @@ class StudentResource extends Resource
             ->actions([
                 Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
