@@ -62,8 +62,8 @@ class StudentResource extends Resource
                     ->searchable(),
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
                 Tables\Actions\ViewAction::make(),
+                Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
