@@ -57,7 +57,6 @@ class StudentResource extends Resource
                     ->searchable(),
                 TextColumn::make('email')
                     ->searchable(),
-                TextColumn::make('bio'),
                 TextColumn::make('date_of_birth'),
                 TextColumn::make('advisor.name')
                     ->searchable(),

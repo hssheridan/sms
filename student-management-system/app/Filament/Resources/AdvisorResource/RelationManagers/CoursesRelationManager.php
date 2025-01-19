@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Resources\StudentResource\RelationManagers;
+namespace App\Filament\Resources\AdvisorResource\RelationManagers;
 
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -21,10 +21,6 @@ class CoursesRelationManager extends RelationManager
                 Forms\Components\TextInput::make('name')
                     ->required()
                     ->maxLength(255),
-                Forms\Components\Select::make('advisor_id')
-                    ->relationship('advisor', 'name')
-                    ->searchable()
-                    ->preload(),
             ]);
     }
 
@@ -34,17 +30,19 @@ class CoursesRelationManager extends RelationManager
             ->recordTitleAttribute('name')
             ->columns([
                 Tables\Columns\TextColumn::make('name'),
-                Tables\Columns\TextColumn::make('advisor.name'),
             ])
             ->filters([
                 //
             ])
             ->headerActions([
                 Tables\Actions\CreateAction::make(),
+                Tables\Actions\AssociateAction::make()
+                    ->preloadRecordSelect(),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
+                Tables\Actions\DissociateAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
