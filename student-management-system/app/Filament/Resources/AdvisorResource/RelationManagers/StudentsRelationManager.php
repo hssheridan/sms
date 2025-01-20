@@ -1,0 +1,69 @@
+<?php
+
+namespace App\Filament\Resources\AdvisorResource\RelationManagers;
+
+use Filament\Forms;
+use Filament\Forms\Form;
+use Filament\Resources\RelationManagers\RelationManager;
+use Filament\Tables;
+use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\SoftDeletingScope;
+
+class StudentsRelationManager extends RelationManager
+{
+    protected static string $relationship = 'students';
+
+    public function form(Form $form): Form
+    {
+        return $form
+            ->schema([
+                Forms\Components\TextInput::make('name')
+                    ->required()
+                    ->maxLength(255),
+                Forms\Components\TextInput::make('email')
+                    ->required()
+                    ->unique(ignorable: fn ($record) => $record)
+                    ->maxLength(255),
+                Forms\Components\TextArea::make('bio')
+                    ->required()
+                    ->maxLength(255),
+                Forms\Components\SpatieMediaLibraryFileUpload::make('image')
+                    ->responsiveImages()
+                    ->image(),
+                Forms\Components\DatePicker::make('date_of_birth')
+                    ->required()
+                    ->maxDate(now()),
+            ]);
+    }
+
+    public function table(Table $table): Table
+    {
+        return $table
+            ->recordTitleAttribute('name')
+            ->columns([
+                Tables\Columns\TextColumn::make('name'),
+                Tables\Columns\TextColumn::make('email'),
+                Tables\Columns\TextColumn::make('date_of_birth'),
+            ])
+            ->filters([
+                //
+            ])
+            ->headerActions([
+                Tables\Actions\CreateAction::make(),
+                Tables\Actions\AssociateAction::make()
+                    ->preloadRecordSelect(),
+            ])
+            ->actions([
+                Tables\Actions\ViewAction::make(),
+                Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
+                Tables\Actions\DissociateAction::make(),
+            ])
+            ->bulkActions([
+                Tables\Actions\BulkActionGroup::make([
+                    Tables\Actions\DeleteBulkAction::make(),
+                ]),
+            ]);
+    }
+}
