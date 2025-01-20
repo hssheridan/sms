@@ -14,8 +14,16 @@ class StudentSeeder extends Seeder
      */
     public function run(): void
     {
-        Student::factory()
+        $students = Student::factory()
             ->count(20)
             ->create();
+
+            foreach($students as $student)
+            {
+                $student
+                    ->addMedia(public_path('seeder-images\\'.rand(1,3).'.jpg'))
+                    ->preservingOriginal()
+                    ->toMediaCollection('default');
+            }
     }
 }

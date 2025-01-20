@@ -16,7 +16,7 @@ class CourseSeeder extends Seeder
     public function run(): void
     {
         Course::factory()
-            ->hasAttached(Student::inRandomOrder()->take(random_int(0,20))->get('id'))
+            ->hasAttached(Student::inRandomOrder()->take(rand(0,20))->get('id'))
             ->count(10)
             ->create();
     }
