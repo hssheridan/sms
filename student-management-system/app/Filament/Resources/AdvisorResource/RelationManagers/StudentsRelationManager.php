@@ -4,14 +4,9 @@ namespace App\Filament\Resources\AdvisorResource\RelationManagers;
 
 use Filament\Forms;
 use Filament\Forms\Form;
-use Filament\Forms\Components\DatePicker;
-use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
-use Filament\Forms\Components\TextArea;
-use Filament\Forms\Components\TextInput;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Filament\Tables\Columns\TextColumn;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
@@ -23,20 +18,20 @@ class StudentsRelationManager extends RelationManager
     {
         return $form
             ->schema([
-                TextInput::make('name')
+                Forms\Components\TextInput::make('name')
                     ->required()
                     ->maxLength(255),
-                TextInput::make('email')
+                Forms\Components\TextInput::make('email')
                     ->required()
                     ->unique(ignorable: fn ($record) => $record)
                     ->maxLength(255),
-                TextArea::make('bio')
+                Forms\Components\TextArea::make('bio')
                     ->required()
                     ->maxLength(255),
-                SpatieMediaLibraryFileUpload::make('image')
+                Forms\Components\SpatieMediaLibraryFileUpload::make('image')
                     ->responsiveImages()
                     ->image(),
-                DatePicker::make('date_of_birth')
+                Forms\Components\DatePicker::make('date_of_birth')
                     ->required()
                     ->maxDate(now()),
             ]);
@@ -47,9 +42,9 @@ class StudentsRelationManager extends RelationManager
         return $table
             ->recordTitleAttribute('name')
             ->columns([
-                TextColumn::make('name'),
-                TextColumn::make('email'),
-                TextColumn::make('date_of_birth'),
+                Tables\Columns\TextColumn::make('name'),
+                Tables\Columns\TextColumn::make('email'),
+                Tables\Columns\TextColumn::make('date_of_birth'),
             ])
             ->filters([
                 //

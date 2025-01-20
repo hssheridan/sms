@@ -2,21 +2,14 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources;
 use App\Filament\Resources\StudentResource\Pages;
 use App\Filament\Resources\StudentResource\RelationManagers;
 use App\Models\Student;
 use Filament\Forms;
 use Filament\Forms\Form;
-use Filament\Forms\Components\DatePicker;
-use Filament\Forms\Components\Select;
-use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
-use Filament\Forms\Components\TextArea;
-use Filament\Forms\Components\TextInput;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Filament\Tables\Columns\TextColumn;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
@@ -30,23 +23,23 @@ class StudentResource extends Resource
     {
         return $form
             ->schema([
-                TextInput::make('name')
+                Forms\Components\TextInput::make('name')
                     ->required()
                     ->maxLength(255),
-                TextInput::make('email')
+                Forms\Components\TextInput::make('email')
                     ->required()
                     ->unique(ignorable: fn ($record) => $record)
                     ->maxLength(255),
-                TextArea::make('bio')
+                Forms\Components\TextArea::make('bio')
                     ->required()
                     ->maxLength(255),
-                SpatieMediaLibraryFileUpload::make('image')
+                Forms\Components\SpatieMediaLibraryFileUpload::make('image')
                     ->responsiveImages()
                     ->image(),
-                DatePicker::make('date_of_birth')
+                Forms\Components\DatePicker::make('date_of_birth')
                     ->required()
                     ->maxDate(now()),
-                Select::make('advisor_id')
+                Forms\Components\Select::make('advisor_id')
                     ->relationship('advisor', 'name')
                     ->searchable()
                     ->preload(),
@@ -57,13 +50,16 @@ class StudentResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('name')
+                Tables\Columns\TextColumn::make('name')
                     ->searchable(),
-                TextColumn::make('email')
+                Tables\Columns\TextColumn::make('email')
                     ->searchable(),
-                TextColumn::make('date_of_birth'),
-                TextColumn::make('advisor.name')
+                Tables\Columns\TextColumn::make('date_of_birth'),
+                Tables\Columns\TextColumn::make('advisor.name')
                     ->searchable(),
+            ])
+            ->filters([
+                //
             ])
             ->actions([
                 Tables\Actions\ViewAction::make(),
