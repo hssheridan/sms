@@ -8,8 +8,6 @@ class StudentController extends Controller
 {
     public function index(): View
     {
-        return view('index', [
-
-        ]);
+        return view('index', []);
     }
 }
